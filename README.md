@@ -1,4 +1,4 @@
-# MakersBnB Python Project Seed
+# Bed-n-Brew Python Project Seed
 
 This repo contains the seed codebase for the MakersBnB project in Python (using 
 Flask and Pytest).
