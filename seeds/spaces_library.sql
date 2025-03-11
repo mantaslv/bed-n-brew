@@ -1,8 +1,15 @@
-DROP TABLE IF EXISTS hosts;
-DROP SEQUENCE IF EXISTS hosts_id_seq;
 DROP TABLE IF EXISTS spaces;
 DROP SEQUENCE IF EXISTS spaces_id_seq;
+DROP TABLE IF EXISTS hosts;
+DROP SEQUENCE IF EXISTS hosts_id_seq;
 
+CREATE SEQUENCE IF NOT EXISTS hosts_id_seq;
+CREATE TABLE hosts (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    contact_number VARCHAR(20),
+    email VARCHAR(255)
+    );
 
 CREATE SEQUENCE IF NOT EXISTS spaces_id_seq;
 CREATE TABLE spaces (
@@ -22,13 +29,10 @@ CREATE TABLE spaces (
     REFERENCES hosts(id) ON DELETE CASCADE
     );
 
-CREATE SEQUENCE IF NOT EXISTS hosts_id_seq;
-CREATE TABLE hosts (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255),
-    contact_number VARCHAR(20),
-    email VARCHAR(255)
-    );
+INSERT INTO hosts (name, contact_number, email) VALUES ('Bilbo Baggins', '0789 123 8765', 'bilbob59@hobbitmail.org');
+INSERT INTO hosts (name, contact_number, email) VALUES ('Mario', '0800 100 400', 'mario@warioland.com');
+INSERT INTO hosts (name, contact_number, email) VALUES ('Luke Skywalker', '0208 783 1234', 'notvadersson@jedi.net');
+INSERT INTO hosts (name, contact_number, email) VALUES ('Rubeus Hagrid', '0207 934 0232', 'keeperofkeys@hogwarts.edu');
 
 INSERT INTO spaces (property_name, location, beds, property_type, price_per_night, description, image_url, rating, availability, booked_dates, host_id)
 	VALUES('Bag End', 'Hobbiton', 9, 'House', 289.50, 'Step into the heart of the Shire and experience the timeless charm of Bag End. This cozy, 
@@ -70,10 +74,3 @@ INSERT INTO spaces (property_name, location, beds, property_type, price_per_nigh
 	VALUES ('The Shrieking Shack Penthouse Apartment', 'Hogsmeade, Scotland', 1, 'Flat', 99.00,  
 	'The most haunted house in Britain! A charmingly decrepit getaway for those who enjoy eerie noises, creaky floors, and the occasional werewolf. No refunds for paranormal activity.',  
 	'https://blockwarts.org/wp-content/uploads/2021/09/cb352102138413cfc51a4e758441a5f0.png?w=751', 3, '01/10/2025-31/10/2025', '', 4);
-
-
-
-INSERT INTO hosts (name, contact_number, email) VALUES ('Bilbo Baggins', '0789 123 8765', 'bilbob59@hobbitmail.org');
-INSERT INTO hosts (name, contact_number, email) VALUES ('Mario', '0800 100 400', 'mario@warioland.com');
-INSERT INTO hosts (name, contact_number, email) VALUES ('Luke Skywalker', '0208 783 1234', 'notvadersson@jedi.net');
-INSERT INTO hosts (name, contact_number, email) VALUES ('Rubeus Hagrid', '0207 934 0232', 'keeperofkeys@hogwarts.edu');
