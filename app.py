@@ -102,10 +102,3 @@ def index():
 # if started in test mode.
 if __name__ == "__main__":
     app.run(debug=True, port=int(os.environ.get("PORT", 5001)))
-
-
-# 1) Make a mock of the list of space objects that we'll eventually have
-# 2) Make the actual HTML page for list_of_spaces.html
-# 3) Make a test
-# 4) idk, we'll figure it out (css)
-#
