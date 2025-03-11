@@ -12,10 +12,10 @@ Everyone in the team should then clone this fork to their local machine to work 
 
 ```shell
 # Set up the virtual environment
-; python -m venv makersbnb-venv
+; python -m venv bnb-venv
 
 # Activate the virtual environment
-; source makersbnb-venv/bin/activate 
+; source bnb-venv/bin/activate 
 
 # Install dependencies
 (makersbnb-venv); pip install -r requirements.txt
