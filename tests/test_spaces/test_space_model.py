@@ -29,3 +29,19 @@ def test_instantiates_with_params():
     assert new_space.availability == "11/03/2025 - 14/03/2025"
     assert new_space.booked_dates == "15/03/2025, 16/03/2025"
     assert new_space.host_id == 1
+
+"""
+Tests that two instances with the same information are considered equal
+"""
+
+def test_instances_are_equal():
+    new_space1 = Space(1, "Property Name 2", 400.00, 2, "London", 1, "http://testURL", "Flat", "VERY nice flat", "11/03/2025 - 14/03/2025", "15/03/2025, 16/03/2025", 1)
+    new_space2 = Space(1, "Property Name 2", 400.00, 2, "London", 1, "http://testURL", "Flat", "VERY nice flat", "11/03/2025 - 14/03/2025", "15/03/2025, 16/03/2025", 1)
+    assert new_space1 == new_space2
+
+"""
+Instantiated object prints nicely
+"""
+def test_object_prints_nicely():
+    new_space1 = Space(1, "Property Name 3", 10000.50, 2, "Saint-Petersburg", 1, "http://testURL", "Flat", "VERY nice flat", "11/03/2025 - 14/03/2025", "15/03/2025, 16/03/2025", 1)
+    assert str(new_space1) == "Space(1, Property Name 3, 10000.5, 2, Saint-Petersburg, 1, http://testURL, Flat, VERY nice flat, 11/03/2025 - 14/03/2025, 15/03/2025, 16/03/2025, 1)"
