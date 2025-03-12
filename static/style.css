@@ -44,6 +44,10 @@ body {
     background-color: white;
 }
 
+.space-item a {
+    text-decoration: none;
+}
+
 .list-button {
     display: block;
     background-color: #8BC34A;
@@ -58,11 +62,12 @@ body {
     cursor: pointer;
 }
 
-.view-button {
+.back-button {
     background-color: #8BC34A;
     color: black;
     border: none;
     border-radius: 5px;
     padding: 5px 10px;
     cursor: pointer;
+    text-decoration: none;
 }
