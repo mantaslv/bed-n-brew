@@ -17,6 +17,6 @@ def test_visit_spaces_page(page, test_web_address):
     expect(space_details).to_contain_text("Cozy London Loft")
     expect(space_details).to_contain_text("£120.5 per night")
     expect(space_details).to_contain_text("2 beds")
-    expect(space_details).to_contain_text("London, UK")
-    expect(space_details).to_contain_text("Rating: 4")
-    expect(space_details).to_contain_text("Type: flat")
+    expect(space_details).to_contain_text("Flat in London, UK")
+    stars = space_details.locator(".star")
+    assert stars.count() == 4
