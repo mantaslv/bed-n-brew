@@ -5,55 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Spaces</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    img {
-      width: 250px;
-      height: auto;
-    }
-
-    .list-button {
-      display: block;
-      background-color: #8BC34A;
-      color: black;
-      text-align: center;
-      padding: 10px;
-      width: 300px;
-      margin: 0 auto 20px;
-      border-radius: 5px;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-    }
-
-    .space-item {
-      border: 1px solid #ccc;
-      border-radius: 25px;
-      padding: 15px;
-      margin-bottom: 15px;
-      max-width: 35%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .view-button {
-      background-color: #8BC34A;
-      color: black;
-      border: none;
-      border-radius: 5px;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="../static/style.css">
 </head>
 
 <body>
@@ -70,7 +22,7 @@
     <div class="space-info">
       <img src={{space.image_url}}>
       <div class="space-details">
-        <h3>{{space.property_name}}</h3>
+        <a href="/spaces/{{space.id}}"><h3>{{space.property_name}}</h3></a>
         <span class="location">{{space.property_type}} in {{space.location}} |</span>
         <span class="price">£{{space.price_per_night}} per night |</span>
         <span class="beds">{{space.beds}} {% if space.beds == 1 %}bed{% else %}beds{% endif %} | </span>
@@ -81,11 +33,6 @@
         </span>
       </div>
     </div>
-      <a href="/spaces/{{space.id}}">
-        <button class="view-button">View →</button>
-      </a>
-    <!-- <a href="/spaces/{{space.id}}"></a> -->
-    <!-- <a href="{{ url_for('get_single_space', id=space.id)}}"></a> -->
   </div>
   {% endfor %}
   {% else %}

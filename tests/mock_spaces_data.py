@@ -1,6 +1,7 @@
 # Mock objects (until we have the DB built out)
 spaces = [
     {
+        "id": 1,
         "property_name": "Cozy London Loft",
         "price_per_night": 120.50,
         "beds": 2,
@@ -15,6 +16,7 @@ spaces = [
         "host_id": 1001,
     },
     {
+        "id": 2,
         "property_name": "Beach House Retreat",
         "price_per_night": 200.00,
         "beds": 4,
@@ -29,6 +31,7 @@ spaces = [
         "host_id": 1002,
     },
     {
+        "id": 3,
         "property_name": "City Centre Studio",
         "price_per_night": 85.75,
         "beds": 1,
@@ -43,6 +46,7 @@ spaces = [
         "host_id": 1003,
     },
     {
+        "id": 4,
         "property_name": "Countryside Cottage",
         "price_per_night": 150.00,
         "beds": 3,
