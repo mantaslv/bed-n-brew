@@ -18,7 +18,7 @@ CREATE TABLE spaces (
     location VARCHAR(255),
     beds INTEGER,
     property_type VARCHAR(255),
-    price_per_night MONEY,
+    price_per_night DOUBLE PRECISION,
     description TEXT,
     image_url TEXT,
     rating SMALLINT,
