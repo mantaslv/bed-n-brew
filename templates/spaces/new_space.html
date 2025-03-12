@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Space</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    form {
+      max-width: 35%;
+      width: 100%;
+    }
+
+    div {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input[type="submit"] {
+      background-color: #8BC34A;
+      color: black;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      text-decoration: none;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Create New Space</h1>
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    
+    <div>
+      {{ form.property_name.label }}
+      {{ form.property_name }}
+      {% if form.property_name.errors %}
+        <ul class="errors">
+          {% for error in form.property_name.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    
+    <div>
+      {{ form.price_per_night.label }}
+      {{ form.price_per_night }}
+      {% if form.price_per_night.errors %}
+        <ul class="errors">
+          {% for error in form.price_per_night.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div>
+      {{ form.beds.label }}
+      {{ form.beds }}
+      {% if form.beds.errors %}
+        <ul class="errors">
+          {% for error in form.beds.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div>
+      {{ form.location.label }}
+      {{ form.location }}
+      {% if form.location.errors %}
+        <ul class="errors">
+          {% for error in form.location.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div>
+      {{ form.rating.label }}
+      {{ form.rating }}
+      {% if form.rating.errors %}
+        <ul class="errors">
+          {% for error in form.rating.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div>
+      {{ form.image_url.label }}
+      {{ form.image_url }}
+      {% if form.image_url.errors %}
+        <ul class="errors">
+          {% for error in form.image_url.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div>
+      {{ form.property_type.label }}
+      {{ form.property_type }}
+      {% if form.property_type.errors %}
+        <ul class="errors">
+          {% for error in form.property_type.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    
+    <div>
+      {{ form.description.label }}
+      {{ form.description }}
+      {% if form.description.errors %}
+        <ul class="errors">
+          {% for error in form.description.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div>
+      {{ form.availability.label }}
+      {{ form.availability }}
+      {% if form.availability.errors %}
+        <ul class="errors">
+          {% for error in form.availability.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div>
+      {{ form.host_name.label }}
+      {{ form.host_name }}
+      {% if form.host_name.errors %}
+        <ul class="errors">
+          {% for error in form.host_name.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    
+    {{ form.submit }}
+  </form>
+  <a href="/spaces">Back</a>
+</body>
+</html>
