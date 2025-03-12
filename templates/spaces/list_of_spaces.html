@@ -81,7 +81,11 @@
         </span>
       </div>
     </div>
-    <button class="view-button">View →</button>
+      <a href="/spaces/{{space.id}}">
+        <button class="view-button">View →</button>
+      </a>
+    <!-- <a href="/spaces/{{space.id}}"></a> -->
+    <!-- <a href="{{ url_for('get_single_space', id=space.id)}}"></a> -->
   </div>
   {% endfor %}
   {% else %}
