@@ -23,6 +23,16 @@
             <p class="space-description">{{space.description}}</p>
         </div>
     </div>
+    <div class="dates-available">
+        <h3 class="section-header">Dates Available</h3>
+        <span>🗓️ {{space.availability}}</span>
+    </div>
+    <div class="host-contact-details">
+        <h3 class="section-header">Contact Details</h3>
+        <span class="host-name">👤 {{host.first_name}} {{host.last_name}} </span>
+        <span class="phone-number">☎️ {{host.contact_number}}</span>
+        <span class="email">📧 {{host.email}}</span>
+    </div>
     <div> 
         <a class="back-button" href="/spaces">Back</a>
     </div>
