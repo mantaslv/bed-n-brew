@@ -85,7 +85,7 @@ def test_create_new_space(page, test_web_address):
 
 # ==================== /register route ====================
 """
-When we /GET /spaces
+When we /GET /register
 We get a 200 OK response 
 """
 
