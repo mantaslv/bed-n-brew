@@ -12,7 +12,7 @@
     <form action="register" method="post">
         {% if errors %}
         <p class="t-errors">
-            Unable to submit form. Please check you entered all details correctly 
+            {{ errors }}
         </p>
         {% endif %}
 
