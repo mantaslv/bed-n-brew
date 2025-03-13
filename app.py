@@ -6,11 +6,16 @@ from flask import redirect
 from forms.space_form import *
 from lib.spaces.space_repo import SpaceRepo
 from lib.spaces.space import Space
+from flask_bcrypt import Bcrypt
+from lib.users.user import *
+from lib.users.user_repo import *
 
 
 # Create a new Flask app
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "This is a secret key"
+bcrypt = Bcrypt(app)
+
 
 # == Your Routes Here ==
 @app.route("/spaces", methods=["GET"])
@@ -20,10 +25,12 @@ def get_spaces():
     spaces = spaces_repo.all()
     return render_template("spaces/list_of_spaces.html", spaces=spaces)
 
+
 @app.route("/", methods=["GET"])
 def index():
     # This just redirects to the spaces page
     return redirect("/spaces")
+
 
 @app.route("/spaces/<id>", methods=["GET"])
 def get_single_space(id):
@@ -57,6 +64,34 @@ def create_space():
         spaces_repo.create(new_space)
         return redirect("/spaces")
     return render_template("spaces/new_space.html", form=form)
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "GET":
+        return render_template("register.html")
+
+    connection = get_flask_database_connection(app)
+    user_repo = UserRepository(connection)
+
+    # Get form data
+    first_name = request.form["first_name"]
+    last_name = request.form["last_name"]
+    email = request.form["email"]
+    contact_number = request.form["contact_number"]
+    password = request.form["password"]
+
+    # Hash the password before passing to DB
+    hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
+
+    # Create a new user
+    new_user = User(None, first_name, last_name, email, contact_number, hashed_password)
+
+    # Saving user to our users_table database
+    user_repo.create(new_user)
+
+    # Redirecting to /spaces page
+    return redirect("/spaces")
 
 
 # These lines start the server if you run this file directly
