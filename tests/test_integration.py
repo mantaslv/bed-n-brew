@@ -2,17 +2,16 @@ from playwright.sync_api import Page, expect
 from lib.spaces.space import *
 from lib.spaces.space_repo import *
 
-
 """
 Test that list_of_spaces.html template renders with all the information in the database
 """
-
 
 def test_get_spaces(db_connection, page, test_web_address):
     db_connection.seed("seeds/spaces_library.sql")
 
     # Check header text
     page.goto(f"http://{test_web_address}/spaces")
+    print(page.content())
     header_h1 = page.locator(".page-header h1")
     expect(header_h1).to_have_text("Available Spaces")
 
@@ -23,17 +22,17 @@ def test_get_spaces(db_connection, page, test_web_address):
     # Check space details
     space_details = page.locator(".space-item .space-details").first
     expect(space_details).to_contain_text("Bag End")
-    expect(space_details).to_contain_text("£289.5 per night")
+    expect(space_details).to_contain_text("£289.50 per night")
     expect(space_details).to_contain_text("9 beds")
     expect(space_details).to_contain_text("Hobbiton")
-    expect(space_details).to_contain_text("Rating: 5")
     expect(space_details).to_contain_text("House")
+    stars = space_details.locator(".star")
+    assert stars.count() == 5
 
 
 """
 Tests that form to create a new space can be submitted 
 """
-
 
 def test_create_new_space(db_connection, page, test_web_address):
     db_connection.seed("seeds/spaces_library.sql")
