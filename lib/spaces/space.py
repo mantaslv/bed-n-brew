@@ -1,3 +1,5 @@
+from decimal import Decimal, ROUND_HALF_UP
+
 class Space():
     def __init__(self, id, property_name, location, beds, property_type, price_per_night, description, image_url, rating, availability, booked_dates, host_id):
         self.id = id
@@ -5,7 +7,7 @@ class Space():
         self.location = location
         self.beds = beds
         self.property_type = property_type
-        self.price_per_night = price_per_night
+        self.price_per_night = Decimal(price_per_night).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)  # Round to 2 decimal places        self.description = description
         self.description = description
         self.image_url = image_url
         self.rating = rating
@@ -17,7 +19,7 @@ class Space():
         return self.__dict__ == other.__dict__
     
     def __repr__(self):
-        return f"Space({self.id}, {self.property_name}, {self.location}, {self.beds}, {self.property_type}, {self.price_per_night}, {self.description}, {self.image_url}, {self.rating}, {self.availability}, {self.booked_dates}, {self.host_id})"
+        return f"Space({self.id}, {self.property_name}, {self.location}, {self.beds}, {self.property_type}, {self.price_per_night:.2f}, {self.description}, {self.image_url}, {self.rating}, {self.availability}, {self.booked_dates}, {self.host_id})"
 
 class HostContact():
     def __init__(self, id, first_name, last_name, contact_number, email):

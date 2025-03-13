@@ -6,7 +6,7 @@ I get some records back
 """
 def test_database_connection(db_connection):
     # Seed the database with some test data
-    db_connection.seed("seeds/database_connection.sql")
+    db_connection.seed("seeds/tests/database_connection.sql")
 
     # Insert a new record
     db_connection.execute("INSERT INTO test_table (name) VALUES (%s)", ["second_record"])

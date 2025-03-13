@@ -37,7 +37,7 @@ def test_instances_are_equal():
 
 def test_object_prints_nicely():
     new_space1 = Space(1,'Bag End', 'Hobbiton', 9, 'House', 289.50, 'Description 1', 'https://test', 5, '01/04/2025-22/09/2025', '', 1)
-    assert str(new_space1) == "Space(1, Bag End, Hobbiton, 9, House, 289.5, Description 1, https://test, 5, 01/04/2025-22/09/2025, , 1)"
+    assert str(new_space1) == "Space(1, Bag End, Hobbiton, 9, House, 289.50, Description 1, https://test, 5, 01/04/2025-22/09/2025, , 1)"
 
 """
 Testing host contact model
