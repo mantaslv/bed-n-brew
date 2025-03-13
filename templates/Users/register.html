@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="../../static/style.css">
+</head>
+<body class="register-user">
+    <h1>Register</h1>
+
+    <form action="register" method="post">
+        {% if errors %}
+        <p class="t-errors">
+            {{ errors }}
+        </p>
+        {% endif %}
+
+        <p>
+            <label for="first name">First Name</label>
+            <input type="text" name="first_name" for="first name">
+        </p>
+
+        <p>
+            <label for="last name">Last Name</label> Name</label>
+            <input type="text" name="last_name" for="last name">
+        </p>
+
+        <p>
+            <label for="email">Email</label>
+            <input type="text" name="email" for="email">
+        </p>
+
+        <p>
+            <label for="contact number">Contact Number</label>
+            <input type="text" name="contact_number" for="contact number">
+        </p>
+
+        <p>
+            <label for="password">Password</label>
+            <input type="text" name="password" for="password">
+        </p>
+
+        <p>
+            <input type="submit" value="Create Book">
+        </p>
+
+    </form>
+    
+</body>
+</html>
