@@ -74,7 +74,7 @@ def create_space():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "GET":
-        return render_template("register.html")
+        return render_template("Users/register.html")
 
     connection = get_flask_database_connection(app)
     user_repo = UserRepository(connection)
@@ -89,7 +89,7 @@ def register():
     # Check if any field is empty
     if not all([first_name, last_name, email, contact_number, password]):
         errors = "All fields are required. Please fill in all fields."
-        return render_template("register.html", errors=errors)
+        return render_template("Users/register.html", errors=errors)
 
     # Hash the password before passing to DB
     hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")

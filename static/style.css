@@ -177,3 +177,8 @@ body {
     text-decoration: none;
     color: #333;
 }
+
+.t-errors {
+    color: red;
+    font-weight: bold;
+}
