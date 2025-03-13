@@ -27,8 +27,8 @@ CREATE TABLE spaces (
     availability TEXT,
     booked_dates TEXT,
     host_id INTEGER,
-    CONSTRAINT fk_host FOREIGN KEY (host_id)
-    REFERENCES hosts(id) ON DELETE CASCADE
+    CONSTRAINT fk_user FOREIGN KEY (host_id)
+    REFERENCES users(id) ON DELETE CASCADE
 );
 
 INSERT INTO users (first_name, last_name, contact_number, email, password) VALUES ('Bilbo', 'Baggins', '0789 123 8765', 'bilbob59@hobbitmail.org', '$2b$12$eD4USQ4Mgd7RUc88c9UqOe6oddbqnVlXDqgguOrLtVESjpbRqUn2.');

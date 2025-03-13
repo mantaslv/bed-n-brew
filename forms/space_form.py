@@ -7,6 +7,7 @@ from wtforms import (
     SelectField,
     TextAreaField,
     SubmitField,
+    HiddenField
 )
 from wtforms.validators import DataRequired, NumberRange, URL, Optional
 
@@ -31,6 +32,6 @@ class SpaceForm(FlaskForm):
             ("Guest House", "Guest House"),
         ])
     description = TextAreaField("Description", validators=[DataRequired()])
-    availability = BooleanField("Available?")
-    host_name = StringField("Host Name", validators=[DataRequired()])
+    availability = StringField("Availability Date Range", validators=[DataRequired()])
+    host_id = HiddenField("Host ID")
     submit = SubmitField("Submit")

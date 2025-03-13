@@ -118,18 +118,6 @@
         </ul>
       {% endif %}
     </div>
-
-    <div>
-      {{ form.host_name.label }}
-      {{ form.host_name }}
-      {% if form.host_name.errors %}
-        <ul class="errors">
-          {% for error in form.host_name.errors %}
-            <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    </div>
     
     {{ form.submit }}
   </form>

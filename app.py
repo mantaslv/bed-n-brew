@@ -10,7 +10,7 @@ from flask_bcrypt import Bcrypt
 from lib.users.user import *
 from lib.users.user_repo import *
 from dotenv import load_dotenv
-from flask_login import LoginManager, login_user, logout_user, login_required
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 
 # Load environment variables from .env file
 load_dotenv()
@@ -81,7 +81,7 @@ def create_space():
             form.rating.data,
             form.availability.data,
             None,
-            1,
+            current_user.id,
         )
         spaces_repo.create(new_space)
         return redirect("/spaces")
