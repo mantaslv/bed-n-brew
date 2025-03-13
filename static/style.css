@@ -267,3 +267,14 @@ body {
     color: red;
     font-weight: bold;
 }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.grid-item {
+    padding: 5px;
+    text-align: center;
+}
