@@ -1,11 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="../../static/style.css">
 </head>
-<body>
-    
+
+<body class="register-user">
+    <h1>Login</h1>
+
+    <form action="login" method="post">
+        {% if errors %}
+        <p class="t-errors">
+            {{ errors }}
+        </p>
+        {% endif %}
+
+        <p>
+            <label for="email">Email</label>
+            <input type="text" name="email" for="email">
+        </p>
+
+        <p>
+            <label for="password">Password</label>
+            <input type="password" name="password" for="password">
+        </p>
+
+        <p>
+            <input type="submit" value="Sign in!">
+        </p>
+
+    </form>
+
+    <div>
+        <a class="back-button" href="/spaces">Back</a>
+    </div>
+
 </body>
+
 </html>

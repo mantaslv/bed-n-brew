@@ -1,6 +1,6 @@
 from unittest.mock import Mock
 import os
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, session
 from lib.database_connection import get_flask_database_connection
 from flask import redirect
 from forms.space_form import *
@@ -101,6 +101,34 @@ def register():
     user_repo.create(new_user)
 
     # Redirecting to /spaces page
+    return redirect("/spaces")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "GET":
+        return render_template("Users/login.html")
+
+    connection = get_flask_database_connection(app)
+    user_repo = UserRepository(connection)
+
+    # Get form data
+    email = request.form["email"]
+    password = request.form["password"]
+
+    # Find user (if they exist)
+    user = user_repo.find_by_email(email)
+
+    if user and bcrypt.check_password_hash(user.password, password):
+        session["user_id"] = user.id
+        return redirect("/spaces")
+
+    return render_template("Users/login.html", errors="Incorrect email or password.")
+
+
+@app.route("/logout")
+def logout():
+    session.pop("user_id", None)
     return redirect("/spaces")
 
 
