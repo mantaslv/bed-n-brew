@@ -5,7 +5,6 @@ When we /GET /spaces
 We get a 200 OK response 
 """
 
-
 def test_route_get_spaces(db_connection, web_client):
     db_connection.seed("seeds/spaces_library.sql")
     response = web_client.get("/spaces")
@@ -17,7 +16,6 @@ When we /GET/ spaces/new
 We get a 200 OK response
 """
 
-
 def test_route_spaces_new(db_connection, web_client):
     db_connection.seed("seeds/spaces_library.sql")
     response = web_client.get("/spaces/new")
@@ -25,13 +23,14 @@ def test_route_spaces_new(db_connection, web_client):
 
 
 """
-When we go to '/' we are redirected to the '/spaces' page"""
-
+When we go to '/' we are redirected to the '/spaces' page
+"""
 
 def test_redirect(db_connection, page, test_web_address):
     db_connection.seed("seeds/spaces_library.sql")
     page.goto(f"http://{test_web_address}/")
     expect(page).to_have_url(f"http://{test_web_address}/spaces")
+<<<<<<< HEAD
 
 
 # ==================== /spaces/new route ====================
@@ -94,3 +93,5 @@ def test_register_route(db_connection, web_client):
     db_connection.seed("seeds/users_table.sql")
     response = web_client.get("/register")
     assert response.status_code == 200
+=======
+>>>>>>> main

@@ -25,10 +25,10 @@ class SpaceForm(FlaskForm):
     property_type = SelectField(
         "Property Type",
         choices=[
-            ("house", "House"),
-            ("apartment", "Apartment"),
-            ("villa", "Villa"),
-            ("other", "Other"),
+            ("House", "House"),
+            ("Flat", "Flat"),
+            ("Hotel", "Hotel"),
+            ("Guest House", "Guest House"),
         ])
     description = TextAreaField("Description", validators=[DataRequired()])
     availability = BooleanField("Available?")
