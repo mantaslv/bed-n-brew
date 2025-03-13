@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{space.property_name}} - Bed'n'Brew</title>
+	<link rel="stylesheet" type="text/css" href="../static/style.css">
+</head>
+<body>
+
+    <div class="single-space-item">
+        <img class="space-image" src={{space.image_url}}>
+        <div class="space-details">
+            <h3 class="page-header">{{space.property_name}}</h3>
+			<span class="location">{{space.property_type}} in {{space.location}} |</span>
+            <span class="price">£{{space.price_per_night}} per night |</span>
+            <span class="beds">{{space.beds}} {% if space.beds == 1 %}bed{% else %}beds{% endif %} | </span>
+            <span class="rating">
+				{% for star in range(space.rating) %}
+					<strong class="star">⭐️</strong>
+                {% endfor %}
+			</span>
+            <p class="space-description">{{space.description}}</p>
+        </div>
+    </div>
+    <div> 
+        <a class="back-button" href="/spaces">Back</a>
+    </div>
+
+</body>
+</html>
+
+

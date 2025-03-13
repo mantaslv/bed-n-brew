@@ -13,7 +13,7 @@ class SpaceRepo():
         return spaces
     
     def find_by_id(self, id):
-        spaces = self._connection.execute('SELECT * From spaces where id= %s', [id])
+        spaces = self._connection.execute('SELECT * FROM spaces WHERE id = %s', [id])
         space = spaces[0]
         return Space(space["id"], space["property_name"], space["location"], space["beds"], space["property_type"], space["price_per_night"], space["description"], space["image_url"], space["rating"], space["availability"], space["booked_dates"], space["host_id"])
     
