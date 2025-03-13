@@ -1,6 +1,6 @@
 from unittest.mock import Mock
 import os
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, session
 from lib.database_connection import get_flask_database_connection
 from flask import redirect
 from forms.space_form import *
@@ -10,6 +10,7 @@ from flask_bcrypt import Bcrypt
 from lib.users.user import *
 from lib.users.user_repo import *
 from dotenv import load_dotenv
+from flask_login import LoginManager, login_user, logout_user, login_required
 
 # Load environment variables from .env file
 load_dotenv()
@@ -20,6 +21,21 @@ app = Flask(__name__)
 # Get secret key from environment variables
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 bcrypt = Bcrypt(app)
+
+# Session Tracking
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "/login"
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    connection = get_flask_database_connection(app)
+    user_repo = UserRepository(connection)
+    user = user_repo.find_by_id(int(user_id))
+    if user:
+        return UserSession(user.id, user.email, user.password)
+    return None
 
 
 # == Your Routes Here ==
@@ -46,6 +62,7 @@ def get_single_space(id):
 
 
 @app.route("/spaces/new", methods=["GET", "POST"])
+@login_required
 def create_space():
     connection = get_flask_database_connection(app)
     spaces_repo = SpaceRepo(connection)
@@ -101,6 +118,36 @@ def register():
     user_repo.create(new_user)
 
     # Redirecting to /spaces page
+    return redirect("/spaces")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "GET":
+        return render_template("Users/login.html")
+
+    connection = get_flask_database_connection(app)
+    user_repo = UserRepository(connection)
+
+    # Get form data
+    email = request.form["email"]
+    password = request.form["password"]
+
+    # Find user (if they exist)
+    user = user_repo.find_by_email(email)
+
+    if user and bcrypt.check_password_hash(user.password, password):
+        # Create a UserSession object from the User data
+        user_session = UserSession(user.id, user.email, user.password)
+        login_user(user_session)
+        return redirect("/spaces")
+
+    return render_template("Users/login.html", errors="Incorrect email or password.")
+
+
+@app.route("/logout")
+def logout():
+    logout_user()
     return redirect("/spaces")
 
 
