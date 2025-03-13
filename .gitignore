@@ -1,5 +1,8 @@
+*.DS_Store*
 *venv*
 __pycache__
 .vscode
 .pytest_cache
 screenshot.png
+.env
+*.pyc
