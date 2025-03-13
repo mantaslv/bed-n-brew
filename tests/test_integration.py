@@ -29,10 +29,23 @@ def test_get_spaces(db_connection, page, test_web_address):
     stars = space_details.locator(".star")
     assert stars.count() == 5
 
+# ==================== /spaces/new route ====================
 
 """
 Tests that form to create a new space can be submitted 
 """
+
+def test_create_new_space_form_exists(page, test_web_address):
+    # Go to the /space/new page
+    page.goto(f"http://{test_web_address}/spaces/new")
+
+    # Check header text
+    header_h1 = page.locator("h1")
+    expect(header_h1).to_have_text("Create New Space")
+
+    # Ensure that the form exists
+    form = page.locator("form")
+    expect(form).to_be_visible()
 
 def test_create_new_space(db_connection, page, test_web_address):
     db_connection.seed("seeds/spaces_library.sql")
