@@ -18,3 +18,17 @@ class Space():
     
     def __repr__(self):
         return f"Space({self.id}, {self.property_name}, {self.location}, {self.beds}, {self.property_type}, {self.price_per_night}, {self.description}, {self.image_url}, {self.rating}, {self.availability}, {self.booked_dates}, {self.host_id})"
+
+class HostContact():
+    def __init__(self, id, first_name, last_name, contact_number, email):
+        self.id = id
+        self.first_name = first_name
+        self.last_name = last_name
+        self.contact_number = contact_number
+        self.email = email
+    
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
+    
+    def __repr__(self):
+        return f"HostContact({self.id}, {self.first_name}, {self.last_name}, {self.contact_number}, {self.email})"

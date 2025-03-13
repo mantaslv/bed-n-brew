@@ -1,5 +1,6 @@
 from lib.spaces.space import *
 """
+Testing space model
 Instantiates with:
 - id
 - property_name
@@ -28,19 +29,39 @@ def test_instantiates_with_params():
     assert new_space.availability == "01/04/2025-22/09/2025"
     assert new_space.booked_dates == ""
     assert new_space.host_id == 1
-    
-"""
-Tests that two instances with the same information are considered equal
-"""
 
 def test_instances_are_equal():
     new_space1 = Space(1, 'Bag End', 'Hobbiton', 9, 'House', 289.50, 'Description 1', 'https://test', 5, '01/04/2025-22/09/2025', '', 1)
     new_space2 = Space(1, 'Bag End', 'Hobbiton', 9, 'House', 289.50, 'Description 1', 'https://test', 5, '01/04/2025-22/09/2025', '', 1)
     assert new_space1 == new_space2
 
-"""
-Instantiated object prints nicely
-"""
 def test_object_prints_nicely():
     new_space1 = Space(1,'Bag End', 'Hobbiton', 9, 'House', 289.50, 'Description 1', 'https://test', 5, '01/04/2025-22/09/2025', '', 1)
     assert str(new_space1) == "Space(1, Bag End, Hobbiton, 9, House, 289.5, Description 1, https://test, 5, 01/04/2025-22/09/2025, , 1)"
+
+"""
+Testing host contact model
+Instantiates with:
+- id
+- first_name
+- last_name
+- contact_number
+- email
+"""
+
+def test_host_instantiates_with_contact_detail_params():
+    host_contact = HostContact(5, 'mrs','test', '0789 123 8765','test@email.com')
+    assert host_contact.id == 5
+    assert host_contact.first_name == 'mrs'
+    assert host_contact.last_name == 'test'
+    assert host_contact.contact_number == '0789 123 8765'
+    assert host_contact.email == 'test@email.com'
+
+def test_host_instances_are_equal():
+    host_contact1 = HostContact(5, 'mrs','test', '0789 123 8765','test@email.com')
+    host_contact2 = HostContact(5, 'mrs','test', '0789 123 8765','test@email.com')
+    assert host_contact1 == host_contact2
+
+def test_host_object_prints_nicely():
+    host_contact = HostContact(5, 'mrs','test', '0789 123 8765','test@email.com')
+    assert str(host_contact) == "HostContact(5, mrs, test, 0789 123 8765, test@email.com)"
