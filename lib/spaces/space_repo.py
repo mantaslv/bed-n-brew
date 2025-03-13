@@ -18,5 +18,9 @@ class SpaceRepo():
         return Space(space["id"], space["property_name"], space["location"], space["beds"], space["property_type"], space["price_per_night"], space["description"], space["image_url"], space["rating"], space["availability"], space["booked_dates"], space["host_id"])
     
     def create(self, space):
-        self._connection.execute('INSERT INTO spaces (property_name, location, beds, property_type, price_per_night, description, image_url, rating, availability, booked_dates, host_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', [space.property_name, space.location, space.beds, space.property_type, space.price_per_night, space.description, space.image_url, space.rating, space.availability, space.booked_dates, space.host_id])
+        self._connection.execute(
+            'INSERT INTO spaces (property_name, location, beds, property_type, price_per_night, description, image_url, rating, availability, booked_dates, host_id) '
+            'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', 
+            [space.property_name, space.location, space.beds, space.property_type, space.price_per_night, space.description, space.image_url, space.rating, space.availability, space.booked_dates, space.host_id]
+        )
         return None
