@@ -57,8 +57,8 @@ def index():
 def get_single_space(id):
     connection = get_flask_database_connection(app)
     space_repo = SpaceRepo(connection)
-    space = space_repo.find_by_id(id)
-    return render_template("spaces/single_space.html", space=space)
+    space, host = space_repo.find_by_id(id)
+    return render_template("spaces/single_space.html", space=space, host=host)
 
 
 @app.route("/spaces/new", methods=["GET", "POST"])

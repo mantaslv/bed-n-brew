@@ -10,8 +10,9 @@ def test_all_method_gets_all(db_connection):
     listings = repository.all()
     assert listings == [
         Space(1, 'Bag End', 'Hobbiton', 9, 'House', 289.50, 'Description 1', 'https://test', 5, '01/04/2025-22/09/2025', '', 1), 
-        Space(2, 'Toad House', 'Mario World', 1, 'House', 50.00, 'Description 2', 'https://test', 3, '01/04/2025-22/09/2025', '', 2)
-        ]
+        Space(2, 'Toad House', 'Mario World', 1, 'House', 50.00, 'Description 2', 'https://test', 3, '01/04/2025-22/09/2025', '', 2),
+        Space(3, 'Bag End', 'Hobbiton', 9, 'House', 289.50, 'Description 1', 'https://test', 5, '01/04/2025-22/09/2025', '', 1), 
+    ]
 
 """
 When SpaceRepo called with #find_by_id method
@@ -21,8 +22,11 @@ It returns a Space object with that id and reflects the seed data
 def test_find_by_id_method(db_connection):
     db_connection.seed("seeds/spaces/test_spaces_library.sql")
     repo = SpaceRepo(db_connection)
-    space = repo.find_by_id(1)
-    assert space == Space(1, 'Bag End', 'Hobbiton', 9, 'House', 289.50, 'Description 1', 'https://test', 5, '01/04/2025-22/09/2025', '', 1)
+    space = repo.find_by_id(3)
+    space_class = Space(3, 'Bag End', 'Hobbiton', 9, 'House', 289.50, 'Description 1', 'https://test', 5, '01/04/2025-22/09/2025', '', 1)
+    host_class = HostContact(1, 'Bilbo','Baggins', '0789 123 8765','bilbob59@hobbitmail.org')
+    assert space[0] == space_class
+    assert space[1] == host_class
 
 """
 When SpaceRepo called with #create
@@ -38,6 +42,7 @@ def test_create_creates_new_db_entry(db_connection):
     assert result == [
         Space(1, 'Bag End', 'Hobbiton', 9, 'House', 289.50, 'Description 1', 'https://test', 5, '01/04/2025-22/09/2025', '', 1), 
         Space(2, 'Toad House', 'Mario World', 1, 'House', 50.00, 'Description 2', 'https://test', 3, '01/04/2025-22/09/2025', '', 2),
-        Space(3, 'Mount Doom', 'Mordor', 430, 'Castle', 100000.58, 'Description 3', 'https://test', 4, '01/04/2025-22/09/2025', '', 1)
-        ]
+        Space(3, 'Bag End', 'Hobbiton', 9, 'House', 289.50, 'Description 1', 'https://test', 5, '01/04/2025-22/09/2025', '', 1), 
+        Space(4, 'Mount Doom', 'Mordor', 430, 'Castle', 100000.58, 'Description 3', 'https://test', 4, '01/04/2025-22/09/2025', '', 1)
+    ]
     
