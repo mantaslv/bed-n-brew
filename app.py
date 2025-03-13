@@ -5,7 +5,8 @@ from lib.database_connection import get_flask_database_connection
 from flask import redirect
 from forms.space_form import *
 from lib.spaces.space_repo import SpaceRepo
-from tests.mock_spaces_data import spaces
+from lib.spaces.space import Space
+
 
 # Create a new Flask app
 app = Flask(__name__)
@@ -14,6 +15,9 @@ app.config["SECRET_KEY"] = "This is a secret key"
 # == Your Routes Here ==
 @app.route("/spaces", methods=["GET"])
 def get_spaces():
+    connection = get_flask_database_connection(app)
+    spaces_repo = SpaceRepo(connection)
+    spaces = spaces_repo.all()
     return render_template("spaces/list_of_spaces.html", spaces=spaces)
 
 @app.route("/", methods=["GET"])
@@ -28,24 +32,32 @@ def get_single_space(id):
     space = space_repo.find_by_id(id)
     return render_template("spaces/single_space.html", space=space)
 
+
 @app.route("/spaces/new", methods=["GET", "POST"])
 def create_space():
+    connection = get_flask_database_connection(app)
+    spaces_repo = SpaceRepo(connection)
+    spaces = spaces_repo.all()
     form = SpaceForm()
     if form.validate_on_submit():
-        new_space = {
-            "property_name": form.property_name.data,
-            "price_per_night": form.price_per_night.data,
-            "beds": form.beds.data,
-            "location": form.location.data,
-            "rating": form.rating.data,
-            "image_url": form.image_url.data,
-            "property_type": form.property_type.data,
-            "description": form.description.data,
-            "availability": form.availability.data,
-            "host_name": form.host_name.data}
-        spaces.append(new_space)
+        new_space = Space(
+            None,
+            form.property_name.data,
+            form.location.data,
+            form.beds.data,
+            form.property_type.data,
+            float(form.price_per_night.data),
+            form.description.data,
+            form.image_url.data,
+            form.rating.data,
+            form.availability.data,
+            None,
+            1,
+        )
+        spaces_repo.create(new_space)
         return redirect("/spaces")
     return render_template("spaces/new_space.html", form=form)
+
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
