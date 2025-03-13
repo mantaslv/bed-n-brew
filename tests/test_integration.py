@@ -44,7 +44,7 @@ def test_create_new_space(db_connection, page, test_web_address):
     page.fill("input[name=property_name]", "london flat")
     page.fill("input[name=price_per_night]", "30")
     page.fill("input[name=beds]", "2")
-    page.fill("input[name=location]", "london")
+    page.fill("input[name=location]", "London")
     page.fill(
         "input[name=image_url]",
         "https://images.prismic.io/tembo/Zwff6YF3NbkBXMYy_semidetachedhouseuk.jpg",
@@ -62,8 +62,8 @@ def test_create_new_space(db_connection, page, test_web_address):
     # Now check that the new space is added to the /spaces route
     space_details = page.locator(".space-item .space-details").last
     expect(space_details).to_contain_text("london flat")
-    expect(space_details).to_contain_text("£30.0 per night")
+    expect(space_details).to_contain_text("£30.00 per night")
     expect(space_details).to_contain_text("2 beds")
-    expect(space_details).to_contain_text("london")
-    expect(space_details).to_contain_text("Rating: 5")
-    expect(space_details).to_contain_text("Type: house")
+    expect(space_details).to_contain_text("House in London")
+    stars = space_details.locator(".star")
+    assert stars.count() == 5
