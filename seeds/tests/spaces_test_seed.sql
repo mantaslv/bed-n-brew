@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS spaces;
 DROP SEQUENCE IF EXISTS spaces_id_seq;
-DROP TABLE IF EXISTS hosts;
-DROP SEQUENCE IF EXISTS hosts_id_seq;
+DROP TABLE IF EXISTS users;
+DROP SEQUENCE IF EXISTS users_id_seq;
 
-CREATE SEQUENCE IF NOT EXISTS hosts_id_seq;
-CREATE TABLE hosts (
+CREATE SEQUENCE IF NOT EXISTS users_id_seq;
+CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(255),
     last_name VARCHAR(255),
@@ -26,11 +26,11 @@ CREATE TABLE spaces (
     availability TEXT,
     booked_dates TEXT,
     host_id INTEGER,
-    CONSTRAINT fk_host FOREIGN KEY (host_id) REFERENCES hosts(id) ON DELETE CASCADE
+    CONSTRAINT fk_user FOREIGN KEY (host_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-INSERT INTO hosts (first_name,last_name, contact_number, email) VALUES ('Bilbo', 'Baggins', '0789 123 8765', 'bilbob59@hobbitmail.org');
-INSERT INTO hosts (first_name,last_name, contact_number, email) VALUES ('Mario', 'Mario', '0800 100 400', 'mario@warioland.com');
+INSERT INTO users (first_name,last_name, contact_number, email) VALUES ('Bilbo', 'Baggins', '0789 123 8765', 'bilbob59@hobbitmail.org');
+INSERT INTO users (first_name,last_name, contact_number, email) VALUES ('Mario', 'Mario', '0800 100 400', 'mario@warioland.com');
 
 INSERT INTO spaces (property_name, location, beds, property_type, price_per_night, description, image_url, rating, availability, booked_dates, host_id) VALUES('Bag End', 'Hobbiton', 9, 'House', 289.50, 'Description 1', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Baggins_residence_%27Bag_End%27_with_party_sign.jpg/2880px-Baggins_residence_%27Bag_End%27_with_party_sign.jpg', 5, '01/04/2025-22/09/2025', '', 1);
 INSERT INTO spaces (property_name, location, beds, property_type, price_per_night, description, image_url, rating, availability, booked_dates, host_id) VALUES('Toad House', 'Mario World', 1, 'House', 50.00, 'Description 2', 'https://mario.wiki.gallery/images/e/e1/Toadhousesm3dl.png', 3, '01/04/2025-22/09/2025', '', 2);
