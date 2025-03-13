@@ -9,11 +9,16 @@ from lib.spaces.space import Space
 from flask_bcrypt import Bcrypt
 from lib.users.user import *
 from lib.users.user_repo import *
+from dotenv import load_dotenv
 
+# Load environment variables from .env file
+load_dotenv()
 
 # Create a new Flask app
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "This is a secret key"
+
+# Get secret key from environment variables
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 bcrypt = Bcrypt(app)
 
 
@@ -80,6 +85,11 @@ def register():
     email = request.form["email"]
     contact_number = request.form["contact_number"]
     password = request.form["password"]
+
+    # Check if any field is empty
+    if not all([first_name, last_name, email, contact_number, password]):
+        errors = "All fields are required. Please fill in all fields."
+        return render_template("register.html", errors=errors)
 
     # Hash the password before passing to DB
     hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")

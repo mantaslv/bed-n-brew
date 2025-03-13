@@ -31,6 +31,10 @@ Everyone in the team should then clone this fork to their local machine to work 
 # Open lib/database_connection.py and change the database names
 (makersbnb-venv); open lib/database_connection.py
 
+# Create a .env file in the root directory
+# Add your secret key to the .env file (used for session management and CSRF protection)
+echo 'SECRET_KEY="your_secret_key_here"' > .env
+
 # Run the tests (with extra logging)
 (makersbnb-venv); pytest -sv
 
@@ -39,3 +43,17 @@ Everyone in the team should then clone this fork to their local machine to work 
 
 # Now visit http://localhost:5001/index in your browser
 ```
+
+## Environment Setup
+
+The application uses environment variables for security. You'll need to set these up locally:
+
+1. Create a `.env` file in the root directory of the project
+2. Add the following line to your `.env` file:
+   ```
+   SECRET_KEY="your_secret_key_here"
+   ```
+   Replace `your_secret_key_here` with a secure random string
+3. The `.env` file is already in `.gitignore` to ensure sensitive data isn't committed to the repository
+
+Note: Never commit your actual `.env` file to version control. A `.env.example` file is provided as a template.
