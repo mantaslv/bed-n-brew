@@ -32,6 +32,20 @@ class UserRepository:
             user["password"],
         )
 
+    def find_by_email(self, email):
+        users = self._connection.execute("SELECT * From users where email= %s", [email])
+        if len(users) < 1:
+            return None
+        user = users[0]
+        return User(
+            user["id"],
+            user["first_name"],
+            user["last_name"],
+            user["email"],
+            user["contact_number"],
+            user["password"],
+        )
+
     def create(self, user):
         self._connection.execute(
             "INSERT INTO users (first_name, last_name, email, contact_number, password) VALUES (%s, %s, %s, %s, %s)",
