@@ -150,6 +150,26 @@ def logout():
     logout_user()
     return redirect("/spaces")
 
+@app.route('/spaces/search')
+def search_spaces():
+    connection = get_flask_database_connection(app)
+    location = request.args.get('location', '')
+    property_type = request.args.get('property_type', '')
+
+    query = "SELECT * FROM spaces WHERE 1=1"
+    params = []
+    
+    if location:
+        query += " AND location LIKE %s"
+        params.append(f"%{location}%")
+    
+    if property_type:
+        query += " AND property_type = %s"
+        params.append(property_type)
+    spaces = connection.execute(query, params)
+    return render_template('spaces/list_of_spaces.html', spaces=spaces)
+
+
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
