@@ -46,9 +46,9 @@ def create_space():
         return redirect("/")
     return render_template("spaces/new_space.html", form=form)
 
-@spaces.route('/spaces/search')
+@spaces.route('/search')
 def search_spaces():
-    connection = get_flask_database_connection(app)
+    connection = get_flask_database_connection()
     location = request.args.get('location', '')
     property_type = request.args.get('property_type', '')
 
