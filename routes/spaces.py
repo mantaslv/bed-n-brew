@@ -1,6 +1,6 @@
 from lib.database_connection import get_flask_database_connection
 from flask_login import login_required, current_user
-from flask import render_template, Blueprint, redirect
+from flask import render_template, Blueprint, redirect, request
 from lib.spaces.space_repo import SpaceRepo
 from forms.space_form import SpaceForm
 from lib.spaces.space import Space
@@ -45,3 +45,22 @@ def create_space():
         spaces_repo.create(new_space)
         return redirect("/")
     return render_template("spaces/new_space.html", form=form)
+
+@spaces.route('/spaces/search')
+def search_spaces():
+    connection = get_flask_database_connection(app)
+    location = request.args.get('location', '')
+    property_type = request.args.get('property_type', '')
+
+    query = "SELECT * FROM spaces WHERE True"
+    params = []
+    
+    if location:
+        query += " AND location ILIKE %s"
+        params.append(f"%{location}%")
+    
+    if property_type:
+        query += " AND property_type = %s"
+        params.append(property_type)
+    spaces = connection.execute(query, params)
+    return render_template('spaces/list_of_spaces.html', spaces=spaces)

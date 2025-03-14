@@ -5,10 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="../../static/style.css">
+    <link rel="stylesheet" type="text/css" href="../../static/style.css">
 </head>
 
 <body class="register-user">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a href="/">
+                <img src="../../static/images/logo.png" alt="Bed 'n' Brew" class="logo">
+            </a>
+        </div>
+        <div class="navbar-menu">
+            {% if current_user.is_authenticated %}
+            <a href="/logout" class="nav-link">Logout</a>
+            {% else %}
+            <a href="/login" class="nav-link">Login</a>
+            <a href="/register" class="nav-link">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
     <h1>Register</h1>
 
     <form action="register" method="post">
