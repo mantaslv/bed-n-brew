@@ -1,5 +1,5 @@
 import os, psycopg
-from flask import g
+from flask import g, current_app
 from psycopg.rows import dict_row
 
 
@@ -70,10 +70,10 @@ class DatabaseConnection:
 
 # This function integrates with Flask to create one database connection that
 # Flask request can use. To see how to use it, look at example_routes.py
-def get_flask_database_connection(app):
+def get_flask_database_connection():
     if not hasattr(g, 'flask_database_connection'):
         g.flask_database_connection = DatabaseConnection(
-            test_mode=((os.getenv('APP_ENV') == 'test') or (app.config['TESTING'] == True))
+            test_mode=((os.getenv('APP_ENV') == 'test') or (current_app.config['TESTING'] == True))
         )
         g.flask_database_connection.connect()
     return g.flask_database_connection
