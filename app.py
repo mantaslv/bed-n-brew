@@ -11,6 +11,10 @@ from lib.users.user import *
 from lib.users.user_repo import *
 from dotenv import load_dotenv
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+import calendar
+from datetime import datetime
+from flask import render_template
+
 
 # Load environment variables from .env file
 load_dotenv()
@@ -52,14 +56,64 @@ def index():
     # This just redirects to the spaces page
     return redirect("/spaces")
 
+def get_month_calendar(year, month):
+    cal = calendar.monthcalendar(year, month)
+    month_name = calendar.month_name[month]
+    return cal, month_name
 
-@app.route("/spaces/<id>", methods=["GET"])
+@app.route("/spaces/<id>", methods=["GET", "POST"])
 def get_single_space(id):
     connection = get_flask_database_connection(app)
     space_repo = SpaceRepo(connection)
     space, host = space_repo.find_by_id(id)
-    return render_template("spaces/single_space.html", space=space, host=host)
 
+    now = datetime.now()
+
+    if request.method == 'POST':
+        start_date = request.form.get('start_date')
+        end_date = request.form.get('end_date')
+
+        if start_date and end_date:
+            session['start_date'] = start_date
+            session['end_date'] = end_date
+        elif 'direction' in request.form:
+            direction = request.form.get('direction')
+            if direction == 'previous':
+                if now.month == 1:
+                    now = now.replace(year=now.year - 1, month=12)
+                else:
+                    now = now.replace(month=now.month - 1)
+            elif direction == 'next':
+                if now.month == 12:
+                    now = now.replace(year=now.year + 1, month=1)
+                else:
+                    now = now.replace(month=now.month + 1)
+    
+    # Set the current and next month based on the session or default to current month
+    current_year = now.year
+    current_month = now.month
+
+    cal_current, month_name_current = get_month_calendar(current_year, current_month)
+    cal_next, month_name_next = get_month_calendar(current_year, current_month + 1 if current_month < 12 else 1)
+
+    # Get selected start and end dates from the session if they exist
+    start_date = int(request.form.get('start_date')) if request.form.get('start_date') else None
+    end_date = int(request.form.get('end_date')) if request.form.get('end_date') else None
+
+
+    return render_template(
+        "spaces/single_space.html", 
+        space=space, 
+        host=host,
+        cal_current=cal_current,
+        month_name_current=month_name_current,
+        cal_next=cal_next,
+        month_name_next=month_name_next,
+        current_year=current_year,
+        current_month=current_month,
+        start_date=start_date,
+        end_date=end_date
+    )
 
 @app.route("/spaces/new", methods=["GET", "POST"])
 @login_required

@@ -278,3 +278,91 @@ body {
     padding: 5px;
     text-align: center;
 }
+
+/* table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+thead {
+    background-color: #f4f4f4;
+}
+
+th {
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+}
+
+tbody td {
+    text-align: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    height: 20px;
+    width: 14.28%; 
+}
+
+td:empty {
+    background-color: #f9f9f9;
+}
+
+td:hover {
+    background-color: #e0f7fa;
+    cursor: pointer;
+}
+
+td:nth-child(6), td:nth-child(7) {
+    background-color: #f9f9f9;
+}
+
+td.current-day {
+    background-color: #ffeb3b;
+    font-weight: bold;
+}
+
+table {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.month {
+    height: 30px;
+} */
+
+.calendar-container {
+    display: flex;
+    justify-content: space-between;
+}
+.calendar {
+    border: 1px solid black;
+    padding: 10px;
+}
+.selected-range {
+    background-color: #00ff00;
+    color: white;
+}
+.highlighted {
+    background-color: #ffcc00;
+}
+td {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+td.selected-range {
+    background-color: #00ff00;
+    color: white;
+}
+td.highlighted {
+    background-color: #ffcc00;
+}
+
+.calendar-submit {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
