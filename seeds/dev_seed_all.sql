@@ -37,13 +37,11 @@ CREATE SEQUENCE IF NOT EXISTS bookings_id_seq;
 CREATE TABLE bookings (
     id SERIAL PRIMARY KEY,
     user_id INTEGER,
-    space_id INTEGER,
     customer_name TEXT,
     number_of_guests INTEGER,
     preferred_dates TEXT,
     message_to_host TEXT,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (space_id) REFERENCES spaces(id)
+    CONSTRAINT fk_booking_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     );
 
 INSERT INTO users (first_name, last_name, contact_number, email, password) VALUES ('Bilbo', 'Baggins', '0789 123 8765', 'bilbob59@hobbitmail.org', '$2b$12$eD4USQ4Mgd7RUc88c9UqOe6oddbqnVlXDqgguOrLtVESjpbRqUn2.');

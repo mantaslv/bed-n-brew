@@ -60,13 +60,14 @@ def get_single_space(id):
     connection = get_flask_database_connection(app)
     space_repo = SpaceRepo(connection)
     space, host = space_repo.find_by_id(id)
+
     form = BookingForm()
     if current_user.is_authenticated:
         form.user_id.data = current_user.id # this is the user_id from the person logged in 
+        
     if form.validate_on_submit():
         space_repo.create_booking(
             form.user_id.data,
-            id, # this is the space_id from the individual space page
             form.customer_name.data,
             form.number_of_guests.data,
             form.preferred_dates.data,

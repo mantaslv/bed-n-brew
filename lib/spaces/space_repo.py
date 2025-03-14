@@ -32,8 +32,9 @@ class SpaceRepo():
         )
         return None
     
-    def create_booking(self, user_id, space_id, customer_name, number_of_guests, preferred_dates, message_to_host):
+    def create_booking(self, user_id, customer_name, number_of_guests, preferred_dates, message_to_host):
         self._connection.execute(
-            'INSERT INTO bookings (user_id, space_id, customer_name, number_of_guests, preferred_dates, message_to_host, status) VALUES (%s, %s, %s, %s, %s, %s, %s)',
-            [user_id, space_id, customer_name, number_of_guests, preferred_dates, message_to_host]
+            'INSERT INTO bookings (user_id, customer_name, number_of_guests, preferred_dates, message_to_host) VALUES (%s, %s, %s, %s, %s)',
+            [user_id, customer_name, number_of_guests, preferred_dates, message_to_host]
         )
+        return None
