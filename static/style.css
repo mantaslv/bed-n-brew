@@ -90,6 +90,10 @@ body {
     cursor: pointer;
 }
 
+.list-button:hover {
+    background-color: #73a23d;
+}
+
 .back-button {
     background-color: #8BC34A;
     color: black;
@@ -277,4 +281,91 @@ body {
 .grid-item {
     padding: 5px;
     text-align: center;
+}
+
+
+
+
+.search-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-form {
+    width: 100%;
+}
+
+.search-input-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    align-items: flex-end;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-input label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #222;
+}
+
+.search-input input,
+.search-input select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+}
+
+.search-input input:focus,
+.search-input select:focus {
+    outline: none;
+    border-color: #8BC34A;
+    box-shadow: 0 0 0 2px rgba(255, 90, 95, 0.2);
+}
+
+.search-button {
+    padding: 12px 24px;
+    background-color: #8BC34A;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.search-button:hover {
+    background-color: #73a23d;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .search-input-group {
+        flex-direction: column;
+    }
+    
+    .search-input {
+        width: 100%;
+    }
+    
+    .search-button {
+        width: 100%;
+        margin-top: 10px;
+    }
 }
