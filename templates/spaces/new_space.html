@@ -1,37 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>New Space</title>
   <link rel="stylesheet" type="text/css" href="../../static/style.css">
 </head>
+
 <body class="new-space">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a href="/">
+        <img src="../../static/images/logo.png" alt="Bed 'n' Brew" class="logo">
+      </a>
+    </div>
+    <div class="navbar-menu">
+      {% if current_user.is_authenticated %}
+      <a href="/logout" class="nav-link">Logout</a>
+      {% else %}
+      <a href="/login" class="nav-link">Login</a>
+      <a href="/register" class="nav-link">Register</a>
+      {% endif %}
+    </div>
+  </nav>
   <h1>Create New Space</h1>
   <form method="POST" action="">
     {{ form.hidden_tag() }}
-    
+
     <div>
       {{ form.property_name.label }}
       {{ form.property_name }}
       {% if form.property_name.errors %}
-        <ul class="errors">
-          {% for error in form.property_name.errors %}
-            <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
+      <ul class="errors">
+        {% for error in form.property_name.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
       {% endif %}
     </div>
-    
+
     <div>
       {{ form.price_per_night.label }}
       {{ form.price_per_night }}
       {% if form.price_per_night.errors %}
-        <ul class="errors">
-          {% for error in form.price_per_night.errors %}
-            <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
+      <ul class="errors">
+        {% for error in form.price_per_night.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
       {% endif %}
     </div>
 
@@ -39,11 +56,11 @@
       {{ form.beds.label }}
       {{ form.beds }}
       {% if form.beds.errors %}
-        <ul class="errors">
-          {% for error in form.beds.errors %}
-            <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
+      <ul class="errors">
+        {% for error in form.beds.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
       {% endif %}
     </div>
 
@@ -51,11 +68,11 @@
       {{ form.location.label }}
       {{ form.location }}
       {% if form.location.errors %}
-        <ul class="errors">
-          {% for error in form.location.errors %}
-            <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
+      <ul class="errors">
+        {% for error in form.location.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
       {% endif %}
     </div>
 
@@ -63,11 +80,11 @@
       {{ form.rating.label }}
       {{ form.rating }}
       {% if form.rating.errors %}
-        <ul class="errors">
-          {% for error in form.rating.errors %}
-            <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
+      <ul class="errors">
+        {% for error in form.rating.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
       {% endif %}
     </div>
 
@@ -75,11 +92,11 @@
       {{ form.image_url.label }}
       {{ form.image_url }}
       {% if form.image_url.errors %}
-        <ul class="errors">
-          {% for error in form.image_url.errors %}
-            <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
+      <ul class="errors">
+        {% for error in form.image_url.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
       {% endif %}
     </div>
 
@@ -87,23 +104,23 @@
       {{ form.property_type.label }}
       {{ form.property_type }}
       {% if form.property_type.errors %}
-        <ul class="errors">
-          {% for error in form.property_type.errors %}
-            <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
+      <ul class="errors">
+        {% for error in form.property_type.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
       {% endif %}
     </div>
-    
+
     <div>
       {{ form.description.label }}
       {{ form.description }}
       {% if form.description.errors %}
-        <ul class="errors">
-          {% for error in form.description.errors %}
-            <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
+      <ul class="errors">
+        {% for error in form.description.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
       {% endif %}
     </div>
 
@@ -111,16 +128,17 @@
       {{ form.availability.label }}
       {{ form.availability }}
       {% if form.availability.errors %}
-        <ul class="errors">
-          {% for error in form.availability.errors %}
-            <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
+      <ul class="errors">
+        {% for error in form.availability.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
       {% endif %}
     </div>
-    
+
     {{ form.submit }}
   </form>
   <a href="/spaces">Back</a>
 </body>
+
 </html>

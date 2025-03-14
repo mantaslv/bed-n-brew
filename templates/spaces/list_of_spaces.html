@@ -9,12 +9,30 @@
 </head>
 
 <body>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a href="/">
+        <img src="../../static/images/logo.png" alt="Bed 'n' Brew" class="logo">
+      </a>
+    </div>
+    <div class="navbar-menu">
+      {% if current_user.is_authenticated %}
+      <a href="/logout" class="nav-link">Logout</a>
+      {% else %}
+      <a href="/login" class="nav-link">Login</a>
+      <a href="/register" class="nav-link">Register</a>
+      {% endif %}
+    </div>
+  </nav>
+
   <div class="page-header">
     <h1>Available Spaces</h1>
     <p>Look at these wonderful spaces to rent...</p>
   </div>
 
+  {% if current_user.is_authenticated %}
   <a class="list-button" href="spaces/new">List a Space</a>
+  {% endif %}
 
   {% if spaces %}
   <div class="grid-container">
