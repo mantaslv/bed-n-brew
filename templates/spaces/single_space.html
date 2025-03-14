@@ -50,10 +50,41 @@
         <span class="phone-number">☎️ {{host.contact_number}}</span>
         <span class="email">📧 {{host.email}}</span>
     </div>
-    <div>
+    {% if current_user.is_authenticated %}
+        <label for="booking-modal" class="book-now-button">Book Now</label>
+        <input type="checkbox" id="booking-modal" class="booking-modal-toggle">
+        <div class="booking-modal">
+            <div class="booking-modal-content">
+                <label for="booking-modal" class="close-modal">X</label>
+                <h3>Booking Form</h3>
+                <form action="{{ url_for('spaces.get_single_space', id=space.id) }}" method="POST">
+                    {{ form.hidden_tag() }}
+                    {{ form.user_id }}
+                    {{ form.customer_name.label }} {{ form.customer_name() }}
+                    {{ form.number_of_guests.label }} {{ form.number_of_guests() }}
+                    {{ form.preferred_dates.label }} {{ form.preferred_dates() }}
+                    {{ form.message_to_host.label }} {{ form.message_to_host() }}
+                    {{ form.submit() }}
+                </form>
+            </div>
+        </div>
+    {% endif %}
+
+ <div> 
         <a class="back-button" href="/spaces">Back</a>
     </div>
-
+        <!-- Display flashed messages as alerts -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                {% for category, message in messages %}
+                alert("{{ message }}");
+                {% endfor %}
+            });
+            </script>
+        {% endif %}
+        {% endwith %}
 </body>
 
 </html>

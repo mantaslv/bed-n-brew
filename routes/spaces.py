@@ -3,6 +3,8 @@ from flask_login import login_required, current_user
 from flask import render_template, Blueprint, redirect, request
 from lib.spaces.space_repo import SpaceRepo
 from forms.space_form import SpaceForm
+from forms.booking_form import BookingForm
+from flask import flash
 from lib.spaces.space import Space
 
 spaces = Blueprint('spaces', __name__)
@@ -14,12 +16,28 @@ def get_spaces():
     spaces = spaces_repo.all()
     return render_template("spaces/list_of_spaces.html", spaces=spaces)
 
-@spaces.route("/<id>", methods=["GET"])
+@spaces.route("/<id>", methods=["GET", "POST"])
 def get_single_space(id):
     connection = get_flask_database_connection()
     space_repo = SpaceRepo(connection)
     space, host = space_repo.find_by_id(id)
-    return render_template("spaces/single_space.html", space=space, host=host)
+
+    form = BookingForm()
+    if current_user.is_authenticated:
+        form.user_id.data = current_user.id # this is the user_id from the person logged in 
+        
+    if form.validate_on_submit():
+        space_repo.create_booking(
+            form.user_id.data,
+            form.customer_name.data,
+            form.number_of_guests.data,
+            form.preferred_dates.data,
+            form.message_to_host.data,
+        )
+        flash('Your booking request has been sent to the host!', 'success') # this is a 'flash' message that will appear on the page when the customer successfully sends a the form
+        return redirect(f"/spaces/{id}") # this will redirect the user back to the individual space page
+    
+    return render_template("spaces/single_space.html", space=space, host=host, form=form)
 
 @spaces.route("/new", methods=["GET", "POST"])
 @login_required
