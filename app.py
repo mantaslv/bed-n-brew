@@ -156,11 +156,11 @@ def search_spaces():
     location = request.args.get('location', '')
     property_type = request.args.get('property_type', '')
 
-    query = "SELECT * FROM spaces WHERE 1=1"
+    query = "SELECT * FROM spaces WHERE True"
     params = []
     
     if location:
-        query += " AND location LIKE %s"
+        query += " AND location ILIKE %s"
         params.append(f"%{location}%")
     
     if property_type:
