@@ -55,7 +55,7 @@ def index():
     return redirect("/spaces")
 
 
-@app.route("/spaces/<id>", methods=["GET"])
+@app.route("/spaces/<id>", methods=["GET", "POST"])
 def get_single_space(id):
     connection = get_flask_database_connection(app)
     space_repo = SpaceRepo(connection)
@@ -72,8 +72,8 @@ def get_single_space(id):
             form.preferred_dates.data,
             form.message_to_host.data,
         )
-        flash('Your booking request has been sent to the host!', 'success') # this is a flash message that will appear on the page when the customer successfully sends a the form
-        return redirect(f"/spaces/{id}")
+        flash('Your booking request has been sent to the host!', 'success') # this is a 'flash' message that will appear on the page when the customer successfully sends a the form
+        return redirect(f"/spaces/{id}") # this will redirect the user back to the individual space page
     
     return render_template("spaces/single_space.html", space=space, host=host, form=form)
 
