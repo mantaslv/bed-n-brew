@@ -22,6 +22,9 @@ class UserRepository:
 
     def find_by_id(self, id):
         users = self._connection.execute("SELECT * From users where id= %s", [id])
+        if not users:
+            return None
+        
         user = users[0]
         return User(
             user["id"],

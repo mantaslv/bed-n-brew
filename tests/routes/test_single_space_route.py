@@ -18,9 +18,8 @@ We see:
     - email
 """
 def test_get_space_1(page, test_web_address, db_connection):
-    db_connection.seed("seeds/spaces_library.sql")
+    db_connection.seed("seeds/tests/spaces_test_seed.sql")
     page.goto(f"http://{test_web_address}/spaces/1")
-    page.screenshot(path="screenshot.png", full_page=True)
     print(page.content())
 
     space_image = page.locator(".single-space-item img.space-image")
@@ -34,15 +33,9 @@ def test_get_space_1(page, test_web_address, db_connection):
     expect(space_details).to_contain_text("House in Hobbiton")
     expect(space_details).to_contain_text("£289.50 per night")
     expect(space_details).to_contain_text("9 beds")
+    
     stars = space_details.locator(".star")
     assert stars.count() == 5
     
     space_description = page.locator(".single-space-item .space-description")
-    expect(space_description).to_contain_text(
-		"Step into the heart of the Shire and experience the timeless charm of Bag End. " 
-        +"This cozy, underground hobbit home offers the perfect blend of rustic comfort and countryside tranquility. "
-        +"With its warm, inviting hearth, spacious living areas, and enchanting gardens, Bag End provides a peaceful escape into a world of simple pleasures. " 
-        +"Whether you're relaxing by the fire with a second breakfast or exploring the rolling hills of the Shire,"
-        +" this charming retreat is the ideal place for hobbits (and non-hobbits) looking to unwind."
-        +" Book your magical stay today and discover the beauty of Middle-earth!"
-	)
+    expect(space_description).to_contain_text('Description 1')
