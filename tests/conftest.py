@@ -2,7 +2,11 @@ import pytest, sys, random, pytest, os
 from pathlib import Path
 from xprocess import ProcessStarter
 from lib.database_connection import DatabaseConnection
-from app import app
+
+from app import create_app
+
+# Now create an app instance
+app = create_app()
 
 # This is a Pytest fixture.
 # It creates an object that we can use in our tests.
