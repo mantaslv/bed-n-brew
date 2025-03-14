@@ -31,8 +31,30 @@
   </div>
 
   {% if current_user.is_authenticated %}
-  <a class="list-button" href="spaces/new">List a Space</a>
+    <a class="list-button" href="http://127.0.0.1:5001/spaces/new">List a Space</a>
   {% endif %}
+
+  <div class="search-container">
+    <form action="/spaces/search" method="GET" class="search-form">
+    <div class="search-input-group">
+        <div class="search-input">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" placeholder="Where are you going?">
+        </div>
+        <div class="search-input">
+        <label for="property_type">Property Type</label>
+        <select id="property_type" name="property_type">
+            <option value="">Any type</option>
+            <option value="Apartment">Apartment</option>
+            <option value="House">House</option>
+            <option value="Villa">Villa</option>
+            <option value="Cabin">Cabin</option>
+        </select>
+        </div>
+        <button type="submit" class="search-button">Search</button>
+    </div>
+    </form>
+</div>
 
   {% if spaces %}
   <div class="grid-container">
