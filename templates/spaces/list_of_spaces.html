@@ -9,11 +9,30 @@
 </head>
 
 <body>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a href="/">
+        <img src="../../static/images/logo.png" alt="Bed 'n' Brew" class="logo">
+      </a>
+    </div>
+    <div class="navbar-menu">
+      {% if current_user.is_authenticated %}
+      <a href="/logout" class="nav-link">Logout</a>
+      {% else %}
+      <a href="/login" class="nav-link">Login</a>
+      <a href="/register" class="nav-link">Register</a>
+      {% endif %}
+    </div>
+  </nav>
+
   <div class="page-header">
     <h1>Available Spaces</h1>
     <p>Look at these wonderful spaces to rent...</p>
   </div>
 
+  {% if current_user.is_authenticated %}
+    <a class="list-button" href="http://127.0.0.1:5001/spaces/new">List a Space</a>
+  {% endif %}
 
   <div class="search-container">
     <form action="/spaces/search" method="GET" class="search-form">
@@ -37,26 +56,24 @@
     </form>
 </div>
 
-
-  <a class="list-button" href="http://127.0.0.1:5001/spaces/new">List a Space</a>
-
-
   {% if spaces %}
   <div class="grid-container">
-    
+
     {% for space in spaces %}
     <div class="grid-item">
       <div class="space-item">
         <div class="space-info">
           <img src={{space.image_url}}>
           <div class="space-details">
-            <a href="/spaces/{{space.id}}"><h3>{{space.property_name}}</h3></a>
+            <a href="/spaces/{{space.id}}">
+              <h3>{{space.property_name}}</h3>
+            </a>
             <span class="location">{{space.property_type}} in {{space.location}} |</span>
             <span class="price">£{{space.price_per_night}} per night |</span>
             <span class="beds">{{space.beds}} {% if space.beds == 1 %}bed{% else %}beds{% endif %} | </span>
             <span class="rating">
               {% for star in range(space.rating) %}
-                <strong class="star">⭐️</strong>
+              <strong class="star">⭐️</strong>
               {% endfor %}
             </span>
           </div>
