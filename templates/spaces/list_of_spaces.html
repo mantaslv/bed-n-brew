@@ -36,20 +36,22 @@
 
   {% if spaces %}
   <div class="grid-container">
-    
+
     {% for space in spaces %}
     <div class="grid-item">
       <div class="space-item">
         <div class="space-info">
           <img src={{space.image_url}}>
           <div class="space-details">
-            <a href="/spaces/{{space.id}}"><h3>{{space.property_name}}</h3></a>
+            <a href="/spaces/{{space.id}}">
+              <h3>{{space.property_name}}</h3>
+            </a>
             <span class="location">{{space.property_type}} in {{space.location}} |</span>
             <span class="price">£{{space.price_per_night}} per night |</span>
             <span class="beds">{{space.beds}} {% if space.beds == 1 %}bed{% else %}beds{% endif %} | </span>
             <span class="rating">
               {% for star in range(space.rating) %}
-                <strong class="star">⭐️</strong>
+              <strong class="star">⭐️</strong>
               {% endfor %}
             </span>
           </div>
