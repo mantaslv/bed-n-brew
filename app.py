@@ -4,6 +4,7 @@ from flask import Flask, request, render_template, session
 from lib.database_connection import get_flask_database_connection
 from flask import redirect
 from forms.space_form import *
+from forms.booking_form import *
 from lib.spaces.space_repo import SpaceRepo
 from lib.spaces.space import Space
 from flask_bcrypt import Bcrypt

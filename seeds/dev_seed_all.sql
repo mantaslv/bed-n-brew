@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS spaces;
 DROP SEQUENCE IF EXISTS spaces_id_seq;
 DROP TABLE IF EXISTS users;
 DROP SEQUENCE IF EXISTS users_id_seq;
+DROP TABLE IF EXISTS bookings;
+DROP SEQUENCE IF EXISTS bookings_id_seq;
 
 CREATE SEQUENCE IF NOT EXISTS users_id_seq;
 CREATE TABLE users (
@@ -30,6 +32,19 @@ CREATE TABLE spaces (
     CONSTRAINT fk_user FOREIGN KEY (host_id)
     REFERENCES users(id) ON DELETE CASCADE
 );
+
+CREATE SEQUENCE IF NOT EXISTS bookings_id_seq;
+CREATE TABLE bookings (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER,
+    space_id INTEGER,
+    customer_name TEXT,
+    number_of_guests INTEGER,
+    preferred_dates TEXT,
+    message_to_host TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (space_id) REFERENCES spaces(id)
+    );
 
 INSERT INTO users (first_name, last_name, contact_number, email, password) VALUES ('Bilbo', 'Baggins', '0789 123 8765', 'bilbob59@hobbitmail.org', '$2b$12$eD4USQ4Mgd7RUc88c9UqOe6oddbqnVlXDqgguOrLtVESjpbRqUn2.');
 INSERT INTO users (first_name, last_name, contact_number, email, password) VALUES ('Mario', 'Mario', '0800 100 400', 'mario@warioland.com', '$2b$12$eD4USQ4Mgd7RUc88c9UqOe6oddbqnVlXDqgguOrLtVESjpbRqUn2.');
